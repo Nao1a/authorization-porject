@@ -38,7 +38,12 @@ const errorHandler = (err, req, res, next) => {
             });
             break;
         default:
-            console.log("No error, all good");
+            // Send a response for errors that don't match any predefined constant
+            res.status(statusCode).json({
+                title: "Error",
+                message: err.message,
+                stackTrace: err.stack,
+            });
             break;
     }
 };

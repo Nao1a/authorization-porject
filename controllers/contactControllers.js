@@ -15,7 +15,7 @@ const createContact = asyncHandler(async (req, res) => {
         throw new Error("All fields are mandatory");
     }
     // Ensure phone number is unique
-    const existingContact = await Contact.findOne({ phone });
+    const existingContact = await Contact.findOne({ phone, user_id: req.user.id });
     if (existingContact) {
         res.status(400);
         throw new Error("Phone number already exists");

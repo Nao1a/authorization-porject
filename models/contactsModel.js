@@ -8,21 +8,21 @@ const contactSchema = mongoose.Schema({
     },
     name: {
         type: String,
-     
         required: [true, "please add the contacts name"],
     },
     email: {
         type: String,
         required: [true, "please add the contact email address"],
-        
     },
     phone: {
         type: String,
         required: [true, "please add the contact phone number"],
-        
     },
 }, {
     timestamps: true,
 });
+
+// Create a compound index to enforce uniqueness per user
+contactSchema.index({ user_id: 1, phone: 1 }, { unique: true });
 
 module.exports = mongoose.model("Contact", contactSchema);
