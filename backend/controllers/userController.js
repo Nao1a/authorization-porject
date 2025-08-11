@@ -66,10 +66,10 @@ const loginUser = asyncHandler (async (req, res) => {
     const user = await User.findOne({email});
     
     if(user && (await bcrypt.compare(password, user.password))) {
-        if (!user.isVerified) {
-            res.status(403);
-            throw new Error("Please verify your email before logging in.");
-        }
+        // if (!user.isVerified) {
+        //     res.status(403);
+        //     throw new Error("Please verify your email before logging in.");
+        // }
         const accessToken = jwt.sign({
             user : {
                 username : user.username,
